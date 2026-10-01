@@ -79,6 +79,7 @@ class KullaniciYonetimSerializer(serializers.ModelSerializer):
         password = validated_data.pop("password", None)
         user = User(**validated_data)
         if password:
+            self._parola_dogrula(password, user)
             user.set_password(password)
         else:
             user.set_unusable_password()
@@ -90,7 +91,20 @@ class KullaniciYonetimSerializer(serializers.ModelSerializer):
         for attr, value in validated_data.items():
             setattr(instance, attr, value)
         if password:
+            self._parola_dogrula(password, instance)
             instance.set_password(password)
         instance.save()
         return instance
+
+    @staticmethod
+    def _parola_dogrula(password, user):
+        """AUTH_PASSWORD_VALIDATORS standardını API'ye uygula (serializer
+        save'de Django validasyonu çalışmaz; FAZ 7Q ile aynı desen)."""
+        from django.contrib.auth.password_validation import validate_password
+        from django.core.exceptions import ValidationError as DjangoValidationError
+
+        try:
+            validate_password(password, user)
+        except DjangoValidationError as exc:
+            raise serializers.ValidationError({"password": exc.messages})
 

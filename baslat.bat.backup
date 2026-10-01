@@ -1,0 +1,171 @@
+@echo off
+chcp 65001 >nul
+title Emlak ERP - Baslatici
+setlocal
+
+REM ============================================================
+REM  Emlak ERP - Basit Baslatici (Batch)
+REM  PowerShell versiyonu (baslat.ps1) daha ozellikli ve guvenilirdir.
+REM ============================================================
+
+cd /d "%~dp0"
+
+set PROJECT_ROOT=%~dp0
+set BACKEND_PORT=8000
+set FRONTEND_PORT=3000
+set VENV_PATH=%PROJECT_ROOT%.venv
+set FRONTEND_PATH=%PROJECT_ROOT%frontend
+set LOG_DIR=%PROJECT_ROOT%logs
+
+if not exist "%LOG_DIR%" mkdir "%LOG_DIR%"
+
+echo.
+echo  ============================================================
+echo   EMLAK ERP - BASLATICI (Batch)
+echo  ============================================================
+echo.
+echo  Not: Daha cok ozellik icin 'baslat.ps1' (PowerShell) kullanin.
+echo.
+
+echo  Calistirma modunu secin:
+echo.
+echo   [1] Hem Backend hem Frontend (AYNI PENCERE)
+echo   [2] Hem Backend hem Frontend (AYRI PENCERELER)
+echo   [3] Sadece Backend (Django API)
+echo   [4] Sadece Frontend (Vite)
+echo   [5] Portlari temizle
+echo   [6] Bagimliliklari kontrol et / kur
+echo.
+choice /C:123456 /M "Seciminiz (1-6): "
+echo.
+
+if errorlevel 6 goto DEPS_CHECK
+if errorlevel 5 goto CLEAN_PORTS
+if errorlevel 4 goto FRONTEND_ONLY
+if errorlevel 3 goto BACKEND_ONLY
+if errorlevel 2 goto SEPARATE_WINDOWS
+if errorlevel 1 goto SAME_WINDOW
+
+:SAME_WINDOW
+echo [MODE] Ayni pencerede calistiriliyor (Ctrl+C ile durdur)
+call :CLEAN_PORTS
+call :CHECK_DEPS
+if errorlevel 1 exit /b 1
+echo.
+echo [START] Backend ve Frontend baslatiliyor...
+echo [INFO] Backend log: %LOG_DIR%\backend.log
+echo [INFO] Frontend log: %LOG_DIR%\frontend.log
+call "%VENV_PATH%\Scripts\activate.bat" >nul
+set DJANGO_SETTINGS_MODULE=config.settings.dev
+start /B "" cmd /c "python manage.py runserver 0.0.0.0:%BACKEND_PORT% ^> \"%LOG_DIR%\backend.log\" 2^>^&1"
+timeout /t 3 /nobreak >nul
+cd "%FRONTEND_PATH%"
+npm run dev -- --port %FRONTEND_PORT% --strictPort --host ^> \"%LOG_DIR%\frontend.log\" 2^>^&1
+echo.
+echo [STOP] Servisler durduruldu.
+taskkill /F /FI "WINDOWTITLE eq *runserver*%BACKEND_PORT%*" >nul 2>&1
+cd "%PROJECT_ROOT%"
+pause
+exit /b 0
+
+:SEPARATE_WINDOWS
+echo [MODE] Ayri pencerelerde calistiriliyor
+call :CLEAN_PORTS
+call :CHECK_DEPS
+if errorlevel 1 exit /b 1
+echo.
+start "Emlak ERP - Backend" cmd /k "cd /d \"%PROJECT_ROOT%\" && call \"%VENV_PATH%\Scripts\activate.bat\" && set DJANGO_SETTINGS_MODULE=config.settings.dev && python manage.py check && python manage.py runserver 0.0.0.0:%BACKEND_PORT%"
+start "Emlak ERP - Frontend" cmd /k "cd /d \"%FRONTEND_PATH%\" && npm run dev -- --port %FRONTEND_PORT% --strictPort --host"
+echo.
+echo Sunucular baslatildi!
+echo  - Backend : http://localhost:%BACKEND_PORT%
+echo  - Frontend: http://localhost:%FRONTEND_PORT%
+echo  - Admin   : http://localhost:%BACKEND_PORT%/admin/
+echo  - API Doc : http://localhost:%BACKEND_PORT%/api/schema/swagger-ui/
+echo.
+echo Bu pencereyi kapatabilirsiniz.
+pause
+exit /b 0
+
+:BACKEND_ONLY
+echo [MODE] Sadece Backend
+call :CLEAN_PORTS
+call :CHECK_DEPS
+if errorlevel 1 exit /b 1
+echo.
+call "%VENV_PATH%\Scripts\activate.bat" >nul
+set DJANGO_SETTINGS_MODULE=config.settings.dev
+python manage.py check
+python manage.py runserver 0.0.0.0:%BACKEND_PORT%
+pause
+exit /b 0
+
+:FRONTEND_ONLY
+echo [MODE] Sadece Frontend
+call :CLEAN_PORTS
+call :CHECK_DEPS
+if errorlevel 1 exit /b 1
+echo.
+cd "%FRONTEND_PATH%"
+npm run dev -- --port %FRONTEND_PORT% --strictPort --host
+cd "%PROJECT_ROOT%"
+pause
+exit /b 0
+
+:CLEAN_PORTS
+echo [CLEAN] Portlar temizleniyor...
+for /f "tokens=5" %%p in ('netstat -ano ^| findstr /R ":%BACKEND_PORT% :%FRONTEND_PORT% :%FRONTEND_PORT%+1 :%FRONTEND_PORT%+2" ^| findstr "LISTENING"') do (
+    taskkill /F /PID %%p >nul 2>&1
+)
+timeout /t 1 /nobreak >nul
+echo [OK] Portlar temizlendi.
+goto :EOF
+
+:CHECK_DEPS
+echo.
+echo [DEPS] Bagimliliklar kontrol ediliyor...
+
+python --version >nul 2>&1
+if errorlevel 1 echo [HATA] Python bulunamadi! && exit /b 1
+echo [OK] Python bulundu.
+
+if not exist "%VENV_PATH%\Scripts\activate.bat" (
+    echo [UYARI] Sanal ortam yok, olusturuluyor...
+    python -m venv "%VENV_PATH%"
+    if errorlevel 1 echo [HATA] Sanal ortam olusturulamadi! && exit /b 1
+    echo [OK] Sanal ortam olusturuldu.
+)
+
+call "%VENV_PATH%\Scripts\activate.bat" >nul
+pip install -q -r "%PROJECT_ROOT%requirements.txt" >nul 2>&1
+if errorlevel 1 echo [HATA] Backend bagimliliklari kurulamadi! && exit /b 1
+echo [OK] Backend bagimliliklari hazir.
+
+node --version >nul 2>&1
+if errorlevel 1 echo [HATA] Node.js bulunamadi! && exit /b 1
+echo [OK] Node.js bulundu.
+
+cd "%FRONTEND_PATH%"
+if exist "node_modules\nul" (
+    echo [OK] Frontend bagimliliklari zaten kurulu.
+) else (
+    echo [DEPS] Frontend bagimliliklari kuruluyor...
+    npm install >nul 2>&1
+    if errorlevel 1 echo [HATA] Frontend bagimliliklari kurulamadi! && exit /b 1
+)
+cd "%PROJECT_ROOT%"
+
+echo [DEPS] Tum bagimliliklar hazir!
+goto :EOF
+
+:DEPS_CHECK
+call :CHECK_DEPS
+echo.
+pause
+exit /b 0
+
+:CLEAN_PORTS_ONLY
+call :CLEAN_PORTS
+echo.
+pause
+exit /b 0

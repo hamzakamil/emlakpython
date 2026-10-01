@@ -1,0 +1,32 @@
+# ── Python ─────────────────────────────────────────────
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# ── Django ─────────────────────────────────────────────
+db.sqlite3
+media/
+staticfiles/
+.env
+.env.test
+*.log
+backups/
+.pytest_cache/
+frontend/test.txt
+*.faz3b-rollback-backup
+*.faz3b-taslak-backup
+
+# ── Node / Frontend ────────────────────────────────────
+node_modules/
+dist/
+.vite/
+frontend/dist/
+
+# ── IDE / OS ───────────────────────────────────────────
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

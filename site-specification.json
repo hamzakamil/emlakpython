@@ -1,0 +1,269 @@
+{
+  "siteBrief": {
+    "siteName": "EMLAK ERP",
+    "siteType": "Multi-tenant ERP/SaaS Application",
+    "primaryGoal": "Manage real estate, construction, accounting, finance, personnel, rental, collections, payments, banking, checks/notes, invoices, inventory and reporting processes for multiple tenants/companies",
+    "audience": "Real estate companies, construction firms, property managers, accounting departments, finance teams, property owners, tenants - Turkish market",
+    "tone": "Professional, trustworthy, authoritative, efficient, Turkish-localized",
+    "brandKeywords": "Enterprise, multi-tenant, secure, compliant, Turkish-localized, real-estate, construction, accounting, finance, scalable"
+  },
+  "layoutNotes": [
+    "Authentication: Login/Register with JWT + Refresh Token, tenant selection",
+    "Dashboard: Role-based overview with KPIs, charts, quick actions",
+    "Navigation: Persistent sidebar with module groups (Gayrimenkul, İnşaat, Cari/Finans, Muhasebe, Personel, Kira, Banka, Çek/Senet, Fatura, Stok, Raporlar, Ayarlar)",
+    "Multi-tenant header: Tenant/company switcher, user profile, notifications, language",
+    "Gayrimenkul Module: Proje, Blok, Daire, Ünite, Kira Sözleşmesi, Kiracı, Malik management",
+    "İnşaat Module: Yapı Sınıfı (IV-A), Poz/Yapı Malzeme, Metraj, Maliyet, Hakediş, Teknik Şartname",
+    "Cari/Finans Module: Cari hesaplar, Tahsilat, Ödeme, Kasa, Banka, Çek/Senet, Fatura",
+    "Muhasebe Module: Hesap planı, Muhasebe fişi, Fiş satırları, Borç/Alacak, Mizan, Büyük defter, Bilanço, Gelir tablosu",
+    "Personel Module: Personel listesi, İzin, Maaş, Avans, Performans",
+    "Kira Module: Kira sözleşmeleri, Tahsilat takibi, Artırım, İndeks, Uyarılar",
+    "Banka Module: Banka hesapları, Havale/EFT, Döviz, Banka ekstre mutabakatı",
+    "Çek/Senet Module: Çek girişi, Senet girişi, Tahsilat, Protesto, Vade takibi",
+    "Fatura Module: E-fatura/E-arşiv, Fatura oluşturma, Gönderim, Durum takibi",
+    "Stok Module: Ürün/Hizmet, Depo, Hareket, Sayım, Minimum stok uyarısı",
+    "Raporlar Module: Dinamik raporlar, Özet raporlar, Grafikler, Export (PDF/Excel/CSV)",
+    "Ayarlar: Tenant ayarları, Kullanıcı/Rol/Yetki, Şirket bilgileri, Vergi dairesi, Numara serileri, Entegrasyonlar",
+    "Audit Log: Tüm kritik işlemlerin kayıtlı görüntülenmesi",
+    "Responsive: Desktop-first, tablet/mobile uyumlu",
+    "RTL/Turkish: Türkçe karakter destekli, locale-aware sıralama/arama"
+  ],
+  "typography": {
+    "primaryFont": "Plus Jakarta Sans",
+    "secondaryFont": "Source Sans Pro",
+    "usage": "Plus Jakarta Sans for headings, UI elements, navigation; Source Sans Pro for body text, tables, forms, data-heavy views",
+    "fontImport": "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Source+Sans+Pro:wght@400;500;600;700&display=swap"
+  },
+  "colorScheme": {
+    "mode": "light",
+    "primary": "#1E3A5F",
+    "primaryLight": "#2D5A8A",
+    "primaryDark": "#0F2440",
+    "secondary": "#007B83",
+    "secondaryLight": "#009FA8",
+    "accent": "#D4A843",
+    "accentLight": "#E8C56D",
+    "background": "#F8FAFC",
+    "surface": "#FFFFFF",
+    "surfaceHover": "#F1F5F9",
+    "border": "#E2E8F0",
+    "textPrimary": "#0F172A",
+    "textSecondary": "#475569",
+    "textMuted": "#94A3B8",
+    "success": "#059669",
+    "successLight": "#D1FAE5",
+    "warning": "#D97706",
+    "warningLight": "#FEF3C7",
+    "error": "#DC2626",
+    "errorLight": "#FEE2E2",
+    "info": "#0284C7",
+    "infoLight": "#E0F2FE"
+  },
+  "darkColorScheme": {
+    "mode": "dark",
+    "primary": "#3B82F6",
+    "primaryLight": "#60A5FA",
+    "primaryDark": "#1D4ED8",
+    "secondary": "#14B8A6",
+    "secondaryLight": "#2DD4BF",
+    "accent": "#FBBF24",
+    "accentLight": "#FCD34D",
+    "background": "#0F172A",
+    "surface": "#1E293B",
+    "surfaceHover": "#334155",
+    "border": "#334155",
+    "textPrimary": "#F8FAFC",
+    "textSecondary": "#CBD5E1",
+    "textMuted": "#64748B",
+    "success": "#10B981",
+    "successLight": "#064E3B",
+    "warning": "#F59E0B",
+    "warningLight": "#78350F",
+    "error": "#EF4444",
+    "errorLight": "#7F1D1D",
+    "info": "#38BDF8",
+    "infoLight": "#1E3A5F"
+  },
+  "components": {
+    "buttons": {
+      "primary": "Solid primary background, white text, rounded-lg, hover: primaryLight",
+      "secondary": "Outline primary border, primary text, rounded-lg, hover: primaryLight bg",
+      "ghost": "Transparent, primary text, rounded-lg, hover: primaryLight/10 bg",
+      "danger": "Solid error background, white text, rounded-lg, hover: error/90",
+      "success": "Solid success background, white text, rounded-lg, hover: success/90"
+    },
+    "inputs": {
+      "default": "Border border, rounded-lg, px-4 py-2.5, focus: ring-2 ring-primary/20 border-primary",
+      "error": "Border error, focus: ring-2 ring-error/20 border-error",
+      "success": "Border success, focus: ring-2 ring-success/20 border-success"
+    },
+    "tables": {
+      "header": "bg-surfaceHover, text-textSecondary, font-medium, py-3 px-4",
+      "row": "border-b border-border/50, hover:bg-surfaceHover/50, transition-colors",
+      "cell": "py-3 px-4, text-textPrimary",
+      "sortable": "cursor-pointer, select-none"
+    },
+    "cards": {
+      "default": "bg-surface, border border-border, rounded-xl, shadow-sm",
+      "hover": "hover:shadow-md, transition-shadow",
+      "elevated": "bg-surface, border border-border, rounded-xl, shadow-lg"
+    },
+    "modals": {
+      "overlay": "bg-black/50, backdrop-blur-sm",
+      "container": "bg-surface, rounded-2xl, shadow-xl, max-h-[90vh], overflow-auto",
+      "header": "border-b border-border, px-6 py-4",
+      "body": "px-6 py-4",
+      "footer": "border-t border-border, px-6 py-4, flex justify-end gap-3"
+    },
+    "sidebar": {
+      "width": "280px",
+      "collapsedWidth": "72px",
+      "bg": "bg-surface",
+      "border": "border-r border-border",
+      "item": "px-4 py-3, rounded-lg, text-textSecondary, hover:bg-primary/10 hover:text-primary, transition-all",
+      "itemActive": "bg-primary/10, text-primary, font-medium",
+      "groupLabel": "px-4 py-2, text-xs, font-semibold, uppercase, tracking-wider, text-textMuted"
+    },
+    "topbar": {
+      "height": "64px",
+      "bg": "bg-surface/80, backdrop-blur-md, border-b border-border",
+      "tenantSelector": "px-4 py-2, rounded-lg, hover:bg-surfaceHover"
+    }
+  },
+  "modules": {
+    "auth": {
+      "pages": ["Login", "Register", "Forgot Password", "Reset Password", "Tenant Selection", "MFA Setup"],
+      "features": ["JWT + Refresh Token", "Remember me", "Multi-tenant selection", "Password strength", "Türkçe validation messages"]
+    },
+    "dashboard": {
+      "widgets": ["KPI Cards", "Revenue Chart", "Expense Chart", "Collection Rate", "Upcoming Payments", "Recent Activities", "Quick Actions"],
+      "roleVariants": ["Süper Admin", "Bayi Admin", "Şirket Admin", "Muhasebe", "Finans", "Personel", "Kullanıcı"]
+    },
+    "gayrimenkul": {
+      "entities": ["Proje", "Blok", "Daire", "Ünite", "Kira Sözleşmesi", "Kiracı", "Malik"],
+      "features": ["CRUD", "Bulk import/export", "Unit status tracking", "Contract management", "Tenant/owner portal"]
+    },
+    "insaat": {
+      "entities": ["Yapı Sınıfı", "Poz Grubu", "Poz", "Malzeme", "Poz-Malzeme İlişkisi", "Proje Metraj", "Hakediş", "Teknik Şartname"],
+      "features": ["ÇŞİDB Poz Entegrasyonu", "Yıllık fiyat versiyonlama", "BOM (Malzeme listesi)", "Maliyet hesaplama", "Hakediş onay akışı", "IV-A sınıfı özel poz grupları"]
+    },
+    "cariFinans": {
+      "entities": ["Cari Hesap", "Tahsilat", "Ödeme", "Kasa", "Banka", "Çek", "Senet", "Fatura"],
+      "features": ["Cari ekstre", "Vade takibi", "Döviz kuru", "Banka mutabakatı", "Çek/Senet vade/Protesto", "E-Fatura entegrasyonu"]
+    },
+    "muhasebe": {
+      "entities": ["Hesap Planı", "Muhasebe Fişi", "Fiş Satırı", "Mizan", "Büyük Defter", "Bilanço", "Gelir Tablosu"],
+      "features": ["Çift taraflı muhasebe", "Otomatik fiş oluşturma", "Kur farkı", "Amortisman", "Kapanış fişleri", "Vergi beyannameleri"]
+    },
+    "personel": {
+      "entities": ["Personel", "İzin", "Maaş", "Avans", "Performans", "İşe Alım/İşten Çıkış"],
+      "features": ["Bordro", "SGK bildirimi", "İzin takibi", "Avans/kesinti", "Performans değerlendirme"]
+    },
+    "kira": {
+      "entities": ["Kira Sözleşmesi", "Kira Tahsilatı", "Artırım", "İndeks", "Uyarı/Bildirim"],
+      "features": ["Otomatik artırım hesaplama", "İndeks takibi", "Vade hatırlatmaları", "Kira artırım geçmişi", "Kiracı portalı"]
+    },
+    "banka": {
+      "entities": ["Banka Hesabı", "Havale/EFT", "Döviz İşlemi", "Banka Ekstresi", "Mutabakat"],
+      "features": ["Çoklu para birimi", "Otomatik kur güncelleme", "Ekstre import (MT940/CSV)", "Mutabakat raporu"]
+    },
+    "cekSenet": {
+      "entities": ["Çek", "Senet", "Tahsilat", "Protesto", "Vade Takibi", "Bankaya Verme", "Müşteriye Verme"],
+      "features": ["Vade takvimi", "Protesto takibi", "Çek/Senet defteri", "Tahsilat/İade", "Risk analizi"]
+    },
+    "fatura": {
+      "entities": ["E-Fatura", "E-Arşiv Faturası", "Fatura Durumu", "GIB Entegrasyonu"],
+      "features": ["UBL-TR formatı", "GIB entegrasyonu", "Otomatik numara serisi", "Durum takibi (Kabul/Red)", "PDF/HTML görüntüleme"]
+    },
+    "stok": {
+      "entities": ["Ürün/Hizmet", "Depo", "Stok Hareketi", "Sayım", "Minimum Stok"],
+      "features": ["FIFO/LIFO", "Seri/Lot takibi", "Depo transferi", "Sayım farkı", "Tedarikçi siparişi"]
+    },
+    "raporlar": {
+      "entities": ["Dinamik Rapor", "Hazır Rapor", "Grafik", "Dashboard Widget"],
+      "features": ["Filtreleme/Gruplama", "Pivot tablo", "Grafik türleri", "PDF/Excel/CSV export", "Zamanlı rapor gönderimi"]
+    },
+    "ayarlar": {
+      "entities": ["Tenant Ayarları", "Kullanıcı", "Rol", "Yetki", "Şirket", "Vergi Dairesi", "Numara Serisi", "Entegrasyon", "Audit Log"],
+      "features": ["RBAC yönetimi", "Tenant izolasyonu", "Numara serisi yönetimi", "API anahtarları", "Webhook yapılandırması"]
+    }
+  },
+  "technicalRequirements": {
+    "frontend": {
+      "framework": "Vue 3",
+      "language": "TypeScript",
+      "stateManagement": "Pinia",
+      "styling": "Tailwind CSS",
+      "apiClient": "Axios + TanStack Query (React Query)",
+      "routing": "Vue Router 4",
+      "forms": "VeeValidate + Zod",
+      "i18n": "Vue I18n (Türkçe primary)",
+      "charts": "Chart.js / ApexCharts",
+      "tables": "TanStack Table (Vue)",
+      "datePicker": "Vue Datepicker",
+      "editor": "TipTap / Quill",
+      "pdf": "pdfmake / jsPDF",
+      "excel": "xlsx / SheetJS"
+    },
+    "backend": {
+      "framework": "Django 5.x",
+      "api": "Django REST Framework",
+      "database": "PostgreSQL 16+",
+      "orm": "Django ORM",
+      "schemaManagement": "Elle SQL — db/schema.sql (pg_dump); Django Migration kullanılmaz",
+      "auth": "JWT (djangorestframework-simplejwt) + Refresh Token",
+      "permissions": "RBAC + Django Permissions + Object-level permissions",
+      "multiTenancy": "tenant_id + PostgreSQL RLS",
+      "apiDocs": "drf-spectacular (OpenAPI/Swagger)",
+      "storage": "S3-compatible (MinIO/AWS S3)",
+      "cache": "Redis",
+      "async": "Celery + Redis",
+      "monitoring": "Sentry, Prometheus, Grafana"
+    },
+    "database": {
+      "primary": "PostgreSQL",
+      "features": ["Row Level Security (RLS)", "Partitioning for large tables", "Materialized views for reports", "Full-text search (Turkish)", "JSONB for flexible data", "Advisory locks for distributed locking"]
+    },
+    "deployment": {
+      "os": "Ubuntu 22.04/24.04 LTS",
+      "containerization": "Docker + Docker Compose",
+      "reverseProxy": "Nginx",
+      "ssl": "Let's Encrypt / Certbot",
+      "processManager": "systemd / Docker",
+      "ciCd": "GitHub Actions / GitLab CI",
+      "backup": "Automated PostgreSQL backup + S3 sync"
+    }
+  },
+  "dataStandards": {
+    "turkishCharacters": "Full UTF-8 support at all layers",
+    "tcKimlikNo": "11 digits, numeric only, masked in lists (123******01)",
+    "phone": "Normalized to 905XXXXXXXXX, masked in lists (0532 *** ** 67)",
+    "name": "Turkish chars preserved, proper case conversion (i→İ, ı→I)",
+    "address": "İl/İlçe/Mahalle with Turkish chars, deduplication",
+    "vergiKimlikNo": "10 digits, numeric only",
+    "vergiDairesi": "Turkish chars preserved",
+    "postaKodu": "5 digits",
+    "iban": "Normalized TR000000000000000000000000, display with spaces",
+    "plaka": "Turkish format (34 ABC 123), case/space insensitive comparison",
+    "currency": "Python Decimal / PostgreSQL NUMERIC, never FLOAT/DOUBLE",
+    "accounting": "Double-entry (Borç = Alacak), no physical DELETE",
+    "softDelete": "Cancel/Reverse/Adjustment with audit trail"
+  },
+  "securityRequirements": {
+    "authentication": ["JWT with short expiry (15min)", "Refresh token rotation", "HttpOnly Secure cookies", "MFA support (TOTP)"],
+    "authorization": ["RBAC at API level", "Object-level permissions", "Tenant isolation at DB level (RLS)"],
+    "dataProtection": ["PII masking in lists", "Encryption at rest for sensitive fields", "Audit logging for all critical operations"],
+    "network": ["CORS configured per tenant", "CSRF protection for state-changing ops", "Rate limiting on auth endpoints", "Security headers (CSP, HSTS, X-Frame-Options)"],
+    "inputValidation": ["Zod schemas on frontend", "DRF serializers + custom validators on backend", "SQL injection prevention via ORM", "XSS prevention via auto-escaping"]
+  },
+  "migrationStrategy": {
+    "phase1": "Current system analysis (DB models, APIs, users, tenants, permissions, frontend stores, financial modules, accounting modules, data relationships)",
+    "phase2": "Django/PostgreSQL infrastructure setup",
+    "phase3": "Tenant/User/Company/Authentication migration",
+    "phase4": "Real estate module migration (Gayrimenkul, Proje, Blok, Daire, Ünite, Kira, Kiracı, Malik)",
+    "phase5": "Finance module migration (Cari, Tahsilat, Ödeme, Kasa, Banka, Çek, Senet, Fatura)",
+    "phase6": "Accounting module migration (Hesap planı, Fiş, Satırlar, Mizan, Defter, Bilanço, Gelir tablosu)",
+    "phase7": "Cutover - Frontend switch to new API after all validations",
+    "validationRules": ["Record counts match", "Financial totals match", "ID relationships preserved", "Tenant/user data integrity", "No data loss"]
+  }
+}

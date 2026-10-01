@@ -1,0 +1,13 @@
+Django==6.1.1
+djangorestframework==3.18.1
+djangorestframework-simplejwt==5.5.1
+psycopg[binary]==3.3.5
+drf-spectacular==0.30.0
+django-filter==26.1
+django-environ==0.14.0
+python-dotenv==1.0.1
+django-cors-headers==4.9.0
+openpyxl==3.1.5
+cryptography==50.0.1
+pytest==9.1.1
+pytest-django==4.14.0

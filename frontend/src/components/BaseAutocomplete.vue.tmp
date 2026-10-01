@@ -1,0 +1,220 @@
+<script setup lang="ts">
+import { computed, ref, watch, nextTick } from 'vue'
+import { Combobox } from '@headlessui/vue'
+import { XMarkIcon, ChevronUpDownIcon } from '@heroicons/vue/24/outline'
+
+interface Option<T = unknown> {
+  value: T
+  label: string
+  disabled?: boolean
+  [key: string]: unknown
+}
+
+interface Props<T = unknown> {
+  modelValue: T | null
+  options?: Option<T>[]
+  fetchFn?: (query: string) => Promise<Option<T>[]>
+  placeholder?: string
+  label?: string
+  clearable?: boolean
+  noDataText?: string
+  disabled?: boolean
+  error?: string
+  debounceMs?: number
+  minChars?: number
+  getOptionLabel?: (option: Option<T>) => string
+  getOptionValue?: (option: Option<T>) => T
+  class?: string
+  required?: boolean
+  name?: string
+  hint?: string
+  multiple?: boolean
+}
+
+interface Emits {
+  (e: 'update:modelValue', value: T | null): void
+  (e: 'change', value: T | null): void
+  (e: 'search', query: string): void
+  (e: 'focus'): void
+  (e: 'blur'): void
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  options: () => [],
+  placeholder: 'Seçin veya yazın...',
+  clearable: true,
+  noDataText: 'Eşleşen kayıt bulunamadı',
+  disabled: false,
+  debounceMs: 300,
+  minChars: 0,
+  getOptionLabel: (opt) => opt.label,
+  getOptionValue: (opt) => opt.value,
+  multiple: false,
+})
+
+const emit = defineEmits<Emits>()
+
+const searchQuery = ref('')
+const isOpen = ref(false)
+const highlightedIndex = ref(-1)
+const debouncedFetch = ref<ReturnType<typeof setTimeout> | null>(null)
+const fetchedOptions = ref<Option<T>[]>([])
+const isLoading = ref(false)
+const inputRef = ref<HTMLInputElement | null>(null)
+
+const allOptions = computed(() => {
+  const staticOpts = props.options || []
+  const dynamicOpts = fetchedOptions.value
+  const seen = new Set<T>()
+  const merged: Option<T>[] = []
+  ;[...staticOpts, ...dynamicOpts].forEach(opt => {
+    const val = props.getOptionValue(opt)
+    if (!seen.has(val)) {
+      seen.add(val)
+      merged.push(opt)
+    }
+  })
+  return merged
+})
+
+const filteredOptions = computed(() => {
+  const query = searchQuery.value.trim().toLowerCase()
+  if (!query) return allOptions.value
+  
+  return allOptions.value.filter(opt => {
+    const label = props.getOptionLabel(opt).toLowerCase()
+    return label.includes(query) || 
+           label.localeCompare(query, 'tr', { sensitivity: 'base', usage: 'search' }) === 0
+  })
+})
+
+const selectedLabel = computed(() => {
+  if (props.modelValue === null || props.modelValue === undefined) return ''
+  const opt = allOptions.value.find(o => props.getOptionValue(o) === props.modelValue)
+  return opt ? props.getOptionLabel(opt) : ''
+})
+
+watch(() => searchQuery.value, async (query) => {
+  emit('search', query)
+  
+  if (props.fetchFn) {
+    if (debouncedFetch.value) clearTimeout(debouncedFetch.value)
+    
+    debouncedFetch.value = setTimeout(async () => {
+      if (query.length < (props.minChars || 0)) {
+        fetchedOptions.value = []
+        return
+      }
+      
+      isLoading.value = true
+      try {
+        const results = await props.fetchFn(query)
+        fetchedOptions.value = results
+      } catch (err) {
+        console.error('Autocomplete fetch error:', err)
+        fetchedOptions.value = []
+      } finally {
+        isLoading.value = false
+      }
+    }, props.debounceMs)
+  }
+})
+
+watch(() => props.disabled, (val) => {
+  if (val) isOpen.value = false
+})
+
+function handleKeydown(e: KeyboardEvent) {
+  const opts = filteredOptions.value
+  if (!opts.length) return
+  
+  switch (e.key) {
+    case 'ArrowDown':
+      e.preventDefault()
+      highlightedIndex.value = Math.min(highlightedIndex.value + 1, opts.length - 1)
+      break
+    case 'ArrowUp':
+      e.preventDefault()
+      highlightedIndex.value = Math.max(highlightedIndex.value - 1, -1)
+      break
+    case 'Enter':
+      if (highlightedIndex.value >= 0) {
+        e.preventDefault()
+        selectOption(opts[highlightedIndex.value])
+      }
+      break
+    case 'Escape':
+      isOpen.value = false
+      highlightedIndex.value = -1
+      searchQuery.value = ''
+      break
+    case 'Tab':
+      isOpen.value = false
+      highlightedIndex.value = -1
+      break
+  }
+}
+
+function selectOption(option: Option<T>) {
+  const value = props.getOptionValue(option)
+  emit('update:modelValue', value)
+  emit('change', value)
+  searchQuery.value = props.getOptionLabel(option)
+  isOpen.value = false
+  highlightedIndex.value = -1
+  nextTick(() => {
+    ;(document.activeElement as HTMLElement)?.blur()
+  })
+}
+
+function clearSelection() {
+  emit('update:modelValue', null)
+  emit('change', null)
+  searchQuery.value = ''
+  isOpen.value = false
+  highlightedIndex.value = -1
+}
+
+function handleFocus() {
+  isOpen.value = true
+  highlightedIndex.value = -1
+  emit('focus')
+}
+
+function handleBlur(e: FocusEvent) {
+  if (e.relatedTarget === null || (e.relatedTarget as HTMLElement)?.closest('.autocomplete-container') === null) {
+    setTimeout(() => {
+      isOpen.value = false
+      highlightedIndex.value = -1
+      if (!props.multiple && props.modelValue !== null) {
+        searchQuery.value = selectedLabel.value
+      } else if (!props.multiple) {
+        searchQuery.value = ''
+      }
+    }, 100)
+  }
+  emit('blur')
+}
+
+function handleInputClick() {
+  if (!props.disabled) {
+    isOpen.value = true
+  }
+}
+
+function handleOptionClick(option: Option<T>) {
+  selectOption(option)
+}
+
+function handleOptionMouseEnter(index: number) {
+  highlightedIndex.value = index
+}
+
+defineExpose({
+  focus: () => {
+    inputRef.value?.focus()
+  },
+  open: () => { isOpen.value = true },
+  close: () => { isOpen.value = false },
+})
+</script>

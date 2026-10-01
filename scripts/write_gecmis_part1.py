@@ -1,0 +1,17 @@
+import os
+views_dir = r"c:\proje\emlakpython\frontend\src\views\insaat\yfk"
+f = open(os.path.join(views_dir, "GuncellemeGecmisi.vue"), "w", encoding="utf-8")
+f.write("<template>\n")
+f.write("  <div class=\"p-4\">\n")
+f.write("    <div class=\"mb-6\">\n")
+f.write("      <h2 class=\"text-xl font-bold mb-2\">Guncelleme Gecmisi</h2>\n")
+f.write("      <p class=\"text-gray-600\">YFK guncelleme islemlerinin gecmisini goruntuleyin.</p>\n")
+f.write("    </div>\n")
+f.write("    <div class=\"card\">\n")
+f.write("      <div class=\"card-header flex justify-between items-center\">\n")
+f.write("        <h3 class=\"card-title\">YFK Guncelleme Gecmisi ({{ gecmisList.length }})</h3>\n")
+f.write("        <div class=\"flex gap-2\"><input v-model=\"searchQuery\" type=\"text\" placeholder=\"Poz no, islem turu veya aciklama ile ara...\" class=\"input w-64\" /><select v-model=\"filterYil\" class=\"input w-32\"><option value=\"\">Tum Yillar</option><option v-for=\"y in availableYears\" :key=\"y\" :value=\"y\">{{ y }}</option></select><select v-model=\"filterIslem\" class=\"input w-40\"><option value=\"\">Tum Islemler</option><option value=\"IMPORT\">Import</option><option value=\"MANUEL\">Manuel</option><option value=\"IPTAL\">Iptal</option></select></div>\n")
+f.write("      </div>\n")
+f.write("      <div class=\"card-body p-0\">\n")
+f.close()
+print("Part 1 done")

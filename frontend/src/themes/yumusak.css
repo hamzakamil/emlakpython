@@ -1,0 +1,8 @@
+// Yumuşak / Doğa tema CSS değişkenleri
+:root {
+  --renk-birincil: #166534;
+  --renk-yuzey: #000000;
+  --golge-kucuk: 12px;
+  --golge-buyuk: 16px;
+  --radius-sm/md/lg: 4px / 8px / 12px;
+}

@@ -1,0 +1,1 @@
+"""Django management komutları — İnşaat modülü içe aktarmalar."""

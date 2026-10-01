@@ -1,0 +1,1 @@
+# Settings paketi — DJANGO_SETTINGS_MODULE ile dev/prod seçilir (manage.py/wsgi/asgi).

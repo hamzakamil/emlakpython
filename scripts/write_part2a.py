@@ -1,0 +1,15 @@
+import os
+views_dir = r"c:\proje\emlakpython\frontend\src\views\insaat\yfk"
+f = open(os.path.join(views_dir, "YillikPozGuncelle.vue"), "a", encoding="utf-8")
+f.write("    <div class=\"card\">\n")
+f.write("      <div class=\"card-header flex justify-between items-center\">\n")
+f.write("        <h3 class=\"card-title\">YFK Poz Versiyonları ({{ pozList.length }})</h3>\n")
+f.write("        <div class=\"flex gap-2\"><input v-model=\"searchQuery\" type=\"text\" placeholder=\"Poz no, ad veya grup kodu ile ara...\" class=\"input w-64\" /><select v-model=\"filterYil\" class=\"input w-32\"><option value=\"\">Tüm Yıllar</option><option v-for=\"y in availableYears\" :key=\"y\" :value=\"y\">{{ y }}</option></select></div>\n")
+f.write("      </div>\n")
+f.write("      <div class=\"card-body p-0\">\n")
+f.write("        <div class=\"overflow-x-auto\"><table class=\"table w-full\"><thead><tr><th>Poz No</th><th>Ad</th><th>Birim</th><th>Grup</th><th>Versiyon</th><th>Değişiklik</th><th>Yıl</th><th>Fiyat (₺)</th><th>Kaynak</th><th>Durum</th><th>İşlemler</th></tr></thead><tbody>\n")
+f.write("          <tr v-for=\"poz in filteredPozList\" :key=\"poz.id\"><td class=\"font-mono\">{{ poz.poz_no }}</td><td>{{ poz.ad }}</td><td>{{ poz.birim }}</td><td>{{ poz.grup_kodu }} - {{ poz.grup_adi }}</td><td>v{{ poz.versiyon }}</td><td><span class=\"badge\" :class=\"degisiklikTuruClass(poz.degisiklik_turu)\">{{ poz.degisiklik_turu }}</span></td><td>{{ poz.yil || '-' }}</td><td class=\"font-mono\">{{ poz.birim_fiyat ? formatCurrency(poz.birim_fiyat) : '-' }}</td><td>{{ poz.kaynak }}</td><td><span class=\"badge\" :class=\"poz.is_active ? 'badge-success' : 'badge-secondary'\">{{ poz.is_active ? 'Aktif' : 'Arşiv' }}</span></td><td><button @click=\"showPozDetail(poz)\" class=\"btn btn-sm btn-ghost\">Detay</button></td></tr>\n")
+f.write("          <tr v-if=\"filteredPozList.length === 0\"><td colspan=\"11\" class=\"text-center py-8 text-gray-500\">Kayıt bulunamadı</td></tr>\n")
+f.write("        </tbody></table></div>\n")
+f.close()
+print("Part 2a done")

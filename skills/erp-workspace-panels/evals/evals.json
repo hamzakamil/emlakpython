@@ -1,0 +1,23 @@
+{
+  "skill_name": "erp-workspace-panels",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Vue 3 ERP'de fatura giriş ekranını modal yerine muhasebe çalışma paneli yap. Sağ altta açılsın, başka menüye gidince kapanmasın, taslak geri yüklensin, büyütülebilsin ve başlıktan taşınabilsin.",
+      "expected_output": "Persistent, docked, draggable and route-safe invoice workspace with draft persistence and visible controls.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Muhasebe fişi kalem tablosu dar ekranda taşıyor. Kolonlar sıkışmasın, yatay kaydırma olsun ve kullanıcı açıklama, miktar, borç ve alacak kolonlarının genişliğini ayarlayıp saklayabilsin.",
+      "expected_output": "Explicit-width horizontal table with user-adjustable persisted column sizing.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Sağda açılan ERP paneli büyütünce sabit header ve sidebar'ın üstüne çıkıyor. Layout değişkenlerini kullanarak paneli yalnızca uygulama içerik alanında maximize et.",
+      "expected_output": "Maximized panel respects header height, sidebar width, mobile layout, z-index, and safe insets.",
+      "files": []
+    }
+  ]
+}

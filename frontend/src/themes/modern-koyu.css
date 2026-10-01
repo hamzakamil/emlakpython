@@ -1,0 +1,8 @@
+// Modern Koyu tema CSS değişkenleri
+:root {
+  --renk-birincil: #3b82f6;
+  --renk-yuzey: #1e293b;
+  --golge-kucuk: 8px;
+  --golge-buyuk: 12px;
+  --radius-sm/md/lg: 4px / 8px / 12px;
+}

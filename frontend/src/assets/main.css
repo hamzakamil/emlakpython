@@ -1,0 +1,45 @@
+/* Developer mode source inspection tooltip. */
+.dev-kaynak-noktasi { border-bottom: 1px dashed #d49a27; cursor: help; }
+.dev-kaynak-popup { position: absolute; z-index: 80; top: calc(100% + 8px); left: 0; min-width: 230px; max-width: 340px; padding: 10px 12px; border: 1px solid #e4c56f; border-radius: 8px; background: #fffaf0; box-shadow: 0 12px 28px rgba(48, 37, 10, .18); color: #594615; font: 12px/1.45 'Source Sans Pro', sans-serif; pointer-events: none; }
+.dev-kaynak-popup strong, .dev-kaynak-popup span { display: block; }
+.dev-kaynak-popup strong { margin-bottom: 4px; color: #936719; text-transform: uppercase; letter-spacing: .08em; font-size: 10px; }
+.dev-inspector-popup { position: fixed; z-index: 9999; min-width: 245px; max-width: 360px; padding: 10px 12px; border: 1px solid #e4c56f; border-radius: 8px; background: #fffaf0; box-shadow: 0 12px 28px rgba(48, 37, 10, .2); color: #594615; font: 12px/1.45 'Source Sans Pro', sans-serif; pointer-events: none; }
+.dev-inspector-popup strong, .dev-inspector-popup span { display: block; }
+.dev-inspector-popup strong { margin-bottom: 4px; color: #936719; text-transform: uppercase; letter-spacing: .08em; font-size: 10px; }
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Fontlar index.html'de (site-specification.json typography) yüklenir;
+   Tailwind ayarları tailwind.config.js'de (font-sans / font-body). */
+html,
+body,
+#app {
+  height: 100%;
+}
+
+body {
+  @apply bg-surface-50 font-body text-surface-900 antialiased;
+}
+
+@layer components {
+  /* Liste ekranları için ortak form/display sınıfları (tekrarı azaltır). */
+  .alan {
+    @apply rounded-lg border border-surface-300 bg-white px-4 py-2.5 text-sm outline-none transition-all focus:border-primary-600 focus:ring-2 focus:ring-primary-600/20;
+  }
+  .etiket {
+    @apply flex flex-col gap-1.5 text-sm font-medium text-surface-700;
+  }
+  .birincil-dugme {
+    @apply rounded-lg bg-primary-800 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-primary-700 disabled:cursor-not-allowed disabled:opacity-60;
+  }
+  .ikincil-dugme {
+    @apply rounded-lg border border-surface-300 px-4 py-2 text-sm text-surface-700 transition-all hover:bg-surface-100 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .hata-kutusu {
+    @apply rounded-lg border border-error-200 bg-error-50 px-4 py-3 text-sm text-error-700;
+  }
+  .durum-rozot {
+    @apply rounded px-2 py-0.5 text-xs font-medium;
+  }
+}

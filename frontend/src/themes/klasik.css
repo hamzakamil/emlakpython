@@ -1,0 +1,8 @@
+// Klasik tema CSS değişkenleri
+:root {
+  --renk-birincil: #1e3a8a;
+  --renk-yuzey: #000000;
+  --golge-kucuk: 4px;
+  --golge-buyuk: 8px;
+  --radius-sm/md/lg: 4px / 8px / 12px;
+}

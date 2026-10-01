@@ -1,0 +1,26 @@
+# Emlak ERP — Yerel geliştirme ortamı (development)
+# Doküman: docs/kurulum.md, memory-bank/techContext.md
+# Teknoloji: PostgreSQL 16
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: emlak_erp_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: emlak_erp
+      POSTGRES_USER: emlak
+      POSTGRES_PASSWORD: emlak_dev_password
+    ports:
+      # NOT: Windows'ta kurulu yerel PostgreSQL 127.0.0.1:5432'yi dinliyor.
+      # Çakışmamak için Docker DB dışarıdan 5433 ile yayınlanır (.env DATABASE_URL aynı porte işaret etmeli).
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U emlak -d emlak_erp"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  pgdata:

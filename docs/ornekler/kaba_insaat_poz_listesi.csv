@@ -1,0 +1,28 @@
+poz_no;grup_kodu;grup_adi;ad;birim;yil;birim_fiyat;tip;kaynak
+15.120.1001;01;Hafriyat ve Zemin İşleri;Makine ile yumuşak ve sert toprak kazılması (Serbest kazı);m³;;;yapim;Kullanıcı tarafından sağlanan kaba inşaat poz listesi - resmi doğrulama bekliyor
+15.120.1003;01;Hafriyat ve Zemin İşleri;Makine ile derin kazı yapılması (Bodrum ve temel pabuçları için);m³;;;yapim;Kullanıcı tarafından sağlanan kaba inşaat poz listesi - resmi doğrulama bekliyor
+15.125.1001;01;Hafriyat ve Zemin İşleri;El ile her türlü toprak kazılması (Çevre drenajı ve lokal düzeltmeler);m³;;;yapim;Kullanıcı tarafından sağlanan kaba inşaat poz listesi - resmi doğrulama bekliyor
+15.125.1007;01;Hafriyat ve Zemin İşleri;Kırmataş temin edilerek serilmesi ve sıkıştırılması (Temel altı blokaj);m³;;;yapim;Kullanıcı tarafından sağlanan kaba inşaat poz listesi - resmi doğrulama bekliyor
+15.140.1002;01;Hafriyat ve Zemin İşleri;Dolgu altına kum-çakıl serilmesi ve silindirle sıkıştırılması;m³;;;yapim;Kullanıcı tarafından sağlanan kaba inşaat poz listesi - resmi doğrulama bekliyor
+15.140.1004;01;Hafriyat ve Zemin İşleri;Kazıdan çıkan malzeme ile geri dolgu yapılması ve sıkıştırılması;m³;;;yapim;Kullanıcı tarafından sağlanan kaba inşaat poz listesi - resmi doğrulama bekliyor
+15.110.1005;01;Hafriyat ve Zemin İşleri;İksa ve şev koruma işleri;m²;;;yapim;Kullanıcı tarafından sağlanan kaba inşaat poz listesi - resmi doğrulama bekliyor
+15.150.1001;03;Betonarme İşleri;C 16/20 hazır beton dökülmesi (Grosbeton / Temel altı düzeltme betonu);m³;;;yapim;Kullanıcı tarafından sağlanan kaba inşaat poz listesi - resmi doğrulama bekliyor
+15.150.1004;03;Betonarme İşleri;C 25/30 hazır beton dökülmesi (Çevre tanzim, istinat duvarları ve saha betonları);m³;;;yapim;Kullanıcı tarafından sağlanan kaba inşaat poz listesi - resmi doğrulama bekliyor
+15.150.1005;03;Betonarme İşleri;C 30/37 basınç dayanım sınıfında hazır beton dökülmesi (Temel, perde, kolon, kiriş ve döşemeler);m³;;;yapim;Kullanıcı tarafından sağlanan kaba inşaat poz listesi - resmi doğrulama bekliyor
+15.150.1006;03;Betonarme İşleri;C 35/45 hazır beton dökülmesi (Zemin ve ilk katların yüksek mukavemet gerektiren kolonları);m³;;;yapim;Kullanıcı tarafından sağlanan kaba inşaat poz listesi - resmi doğrulama bekliyor
+15.160.1002;05;Donatı / Demir İşleri;Nervürlü çelik üretimi ve yerine konulması (Ø 8 - Ø 32 mm);kg;;;yapim;Kullanıcı tarafından sağlanan kaba inşaat poz listesi - resmi doğrulama bekliyor
+15.160.1003;05;Donatı / Demir İşleri;Hasır çelik temini ve yerine konulması;m²;;;yapim;Kullanıcı tarafından sağlanan kaba inşaat poz listesi - resmi doğrulama bekliyor
+15.160.1005;05;Donatı / Demir İşleri;Profil demirlerden yapısal çelik elemanları yapılması ve montajı;kg;;;yapim;Kullanıcı tarafından sağlanan kaba inşaat poz listesi - resmi doğrulama bekliyor
+15.180.1001;04;Kalıp ve İskele İşleri;Ahşaptan düz yüzeyli beton ve betonarme kalıbı yapılması;m²;;;yapim;Kullanıcı tarafından sağlanan kaba inşaat poz listesi - resmi doğrulama bekliyor
+15.180.1004;04;Kalıp ve İskele İşleri;Endüstriyel veya pürüzsüz yüzeyli ahşap kalıp yapılması;m²;;;yapim;Kullanıcı tarafından sağlanan kaba inşaat poz listesi - resmi doğrulama bekliyor
+15.180.1007;04;Kalıp ve İskele İşleri;Mantar ve kaset döşeme kalıbı yapılması;m²;;;yapim;Kullanıcı tarafından sağlanan kaba inşaat poz listesi - resmi doğrulama bekliyor
+15.185.1001;04;Kalıp ve İskele İşleri;Demirden yapılmış boru iskele kullanılması;m²;;;yapim;Kullanıcı tarafından sağlanan kaba inşaat poz listesi - resmi doğrulama bekliyor
+15.185.1003;04;Kalıp ve İskele İşleri;Ayarlanabilir çelik dikmeli kalıp iskelesi kurulması;m²;;;yapim;Kullanıcı tarafından sağlanan kaba inşaat poz listesi - resmi doğrulama bekliyor
+15.220.1003;06;Duvar İşleri;Blok tuğla ile dış ve iç bölme duvarı yapılması;m²;;;yapim;Kullanıcı tarafından sağlanan kaba inşaat poz listesi - resmi doğrulama bekliyor
+15.220.1022;06;Duvar İşleri;Gazbeton duvar blokları ile dış ve iç duvar yapılması;m²;;;yapim;Kullanıcı tarafından sağlanan kaba inşaat poz listesi - resmi doğrulama bekliyor
+15.220.1030;06;Duvar İşleri;Bimsblok duvar blokları ile iç bölme duvarı yapılması;m²;;;yapim;Kullanıcı tarafından sağlanan kaba inşaat poz listesi - resmi doğrulama bekliyor
+15.225.1001;06;Duvar İşleri;Çimento esaslı harç ile duvar örülmesi;m³;;;yapim;Kullanıcı tarafından sağlanan kaba inşaat poz listesi - resmi doğrulama bekliyor
+15.290.1002;08;Su Yalıtımı;Bitüm esaslı likit membran ile temel ve perde duvar yalıtımı;m²;;;yapim;Kullanıcı tarafından sağlanan kaba inşaat poz listesi - resmi doğrulama bekliyor
+15.290.1010;08;Su Yalıtımı;4 mm polyester keçe taşıyıcılı elastomerik SBS su yalıtım membranı uygulanması;m²;;;yapim;Kullanıcı tarafından sağlanan kaba inşaat poz listesi - resmi doğrulama bekliyor
+15.295.1003;09;Isı Yalıtımı;Ekstrüde polistiren XPS levhaları ile toprak altı perde yalıtımı;m²;;;yapim;Kullanıcı tarafından sağlanan kaba inşaat poz listesi - resmi doğrulama bekliyor
+15.300.1005;35;Dış Altyapı;Çevre drenaj borularının döşenmesi;m;;;yapim;Kullanıcı tarafından sağlanan kaba inşaat poz listesi - resmi doğrulama bekliyor

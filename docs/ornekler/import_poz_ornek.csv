@@ -1,0 +1,4 @@
+poz_no;grup_kodu;grup_adi;ad;birim;yil;birim_fiyat;tip;kaynak
+15.110.1001;KAZI;Kazı ve Zemin İşleri;Kazı makine ile yumuşak zeminde;m³;2026;235.42;yapim;ÇŞİDB 2026 tebliği
+15.275.1102;INCE;İnce İnşaat İşleri;Kireç/çimento karışımı iç cephe sıvası;m²;2026;98.70;iscilik;ÇŞİDB 2026 tebliği
+15.315.1003;DISCEP;Dış Cephe ve Çevre Düzenleme;PVC yağmur borusu (çatı);m;2026;;nakliye;ÇŞİDB 2026 tebliği

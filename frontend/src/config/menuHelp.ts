@@ -523,7 +523,7 @@ cekSenetler: {
   },
 
   veritabaniYonetimi: {
-    amac: "Veritabanını görüntüler, yedekler ve Excel içeri/dışı işlemleri yapar.",
+    amac: "Veritabanını görüntüler, yedekler ve Excel içeri/dışa işlemleri yapar.",
     yapilabilir: [
       "Tablo bazlı veri görüntüleme",
       "Excel şablonu indirme ve veri yükleme",
@@ -531,5 +531,90 @@ cekSenetler: {
       "Belirli kayıtları düzenleme"
     ],
     ipucu: "Yedek almadan toplu içeri aktarma yapmayın; hatalı veri tüm sistemi etkiler."
+  },
+
+  // ==================== FAZ 7 EK EKRANLAR ====================
+  malzemeler: {
+    amac: "İnşaat malzemelerinin kod, birim ve TS referanslı kartlarını tutar.",
+    yapilabilir: [
+      "Malzeme kartı oluşturma ve düzenleme",
+      "Kod, ad veya TS no ile arama",
+      "Aktif/pasif filtreleme",
+      "Excel ile toplu içe aktarma"
+    ],
+    ipucu: "Poz ve siparişlerde kullanılacak malzemeyi önce burada tanımlayın."
+  },
+  metrajKesif: {
+    amac: "Mahal, metraj, model ve analiz akışlarını tek ekranda toplar.",
+    yapilabilir: [
+      "Proje bazında mahal ve metraj özetini görme",
+      "Mahal Listesi, IFC ve Analiz Kitabı ekranlarına geçiş"
+    ],
+    ipucu: "Üretim mevcut detay ekranlarında yapılır; burası izleme ve geçiş merkezidir."
+  },
+  maliyetHesabi: {
+    amac: "Yaklaşık maliyet, poz planı ve S-eğrisi akışlarını tek ekranda toplar.",
+    yapilabilir: [
+      "Proje/yıl bazında maliyet özetini görme",
+      "Yaklaşık Maliyet, Poz Planları ve Analiz Kitabı ekranlarına geçiş"
+    ],
+    ipucu: "Sapma analizi için poz planlarına gerçekleşen metraj girilmelidir."
+  },
+  genelBakis: {
+    amac: "Portföy, nakit, kâr/zarar, ilerleme ve zaman çizelgesini tek ekranda izler.",
+    yapilabilir: [
+      "Proje/yıl seçerek tüm maliyet göstergelerini görme",
+      "Portföy, Nakit Akışı, Kâr/Zarar ve Gantt ekranlarına geçiş"
+    ],
+    ipucu: "Boş görünen kartlar, ilgili modülde henüz veri girilmediğini gösterir."
+  },
+  insaatRaporlar: {
+    amac: "Tüm inşaat raporlarına tek ekrandan erişim sağlar.",
+    yapilabilir: [
+      "Portföy, nakit, kâr/zarar, S-eğrisi, Gantt ve teknik raporlara geçiş",
+      "Mizan ve şartname raporlarına geçiş"
+    ],
+    ipucu: "Hesaplama bu ekranda yapılmaz; her rapor kendi ekranında üretilir."
+  },
+  insaatAyarlar: {
+    amac: "Firma, kullanıcı, proje ve muhasebe ayarlarına merkezi erişim sağlar.",
+    yapilabilir: [
+      "Firma bilgileri, kullanıcı, tenant, proje ve hesap planı ekranlarına geçiş",
+      "Rol ve yetki matrisini görüntüleme"
+    ],
+    ipucu: "Yetki değişiklikleri backend kurallarıyla uygulanır; tablo bilgilendirme amaçlıdır."
+  },
+  profil: {
+    amac: "Kendi profil bilgilerini görüntüler ve şifre değiştirmeyi sağlar.",
+    yapilabilir: [
+      "Kullanıcı, rol ve firma bilgisini görme",
+      "Mevcut şifreyle yeni şifre belirleme"
+    ],
+    ipucu: "Şifre değişikliğinden sonra diğer cihazlardaki oturumlar kapanmaz; gerekiyorsa çıkış yapın."
+  },
+  vergiProfilleri: {
+    amac: "Fatura kalemlerinde tekrar kullanılan KDV, tevkifat ve stopaj kurallarını tutar.",
+    yapilabilir: [
+      "Vergi profili oluşturma ve düzenleme",
+      "Kod veya ad ile arama",
+      "Fatura girişinde profili kaleme uygulama"
+    ],
+    ipucu: "Oranlar 0-100 arasında olmalıdır; profili silmek yerine pasife alın."
+  },
+  stokHesapEsleme: {
+    amac: "Malzeme bazında stok ve KDV muhasebe hesap eşleşmelerini yönetir.",
+    yapilabilir: [
+      "Malzemeye özel veya tenant varsayılanı eşleme tanımlama",
+      "Hesap türüne göre filtreleme"
+    ],
+    ipucu: "Malzeme seçilmezse kayıt tenant varsayılanı olur; aynı kapsamda tekrar tanımlanamaz."
+  },
+  hatirlatmaKurallari: {
+    amac: "Modül tarihlerinden otomatik hatırlatma üreten kuralları yönetir.",
+    yapilabilir: [
+      "Modül ve tetikleyici bazında kural tanımlama",
+      "Önce-gün sayısı, seviye ve aktiflik yönetimi"
+    ],
+    ipucu: "Aynı modül/tetikleyici/gün için tek kural tanımlanabilir."
   }
 };

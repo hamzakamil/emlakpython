@@ -5,7 +5,7 @@
  * Topbar: normal kullanıcıda /auth/me'den gelen gerçek firma adı; süper
  * admin'de tenant seçici dropdown (X-Tenant-Id kapsamı).
  */
-import { computed, onMounted, onUnmounted, provide, ref } from 'vue'
+import { computed, onMounted, onUnmounted, provide, ref, watch } from 'vue'
 import { RouterLink, RouterView, useRoute, useRouter } from 'vue-router'
 import {
   BarChart3,
@@ -120,6 +120,18 @@ interface NavGrup {
   maddeler: NavMadde[]
 }
 
+/** Menüde yer almayan ama yardımı olan ekranlar (Ayarlar hub'ından erişilir). */
+const yolYardimEsleme: Record<string, { ad: string; helpKey: keyof typeof menuHelp }> = {
+  '/profil': { ad: 'Profil ve Güvenlik', helpKey: 'profil' },
+  '/finans/vergi-profilleri': { ad: 'Vergi Profilleri', helpKey: 'vergiProfilleri' },
+  '/finans/stok-hesap-esleme': { ad: 'Stok Hesap Eşleme', helpKey: 'stokHesapEsleme' },
+  '/insaat/hatirlatma-kurallari': { ad: 'Hatırlatma Kuralları', helpKey: 'hatirlatmaKurallari' },
+  '/insaat/yapi-sinifi': { ad: 'Yapı Sınıfları', helpKey: 'yapiSinifi' },
+  '/insaat/pozlar': { ad: 'Pozlar', helpKey: 'pozlar' },
+  '/insaat/malzemeler': { ad: 'Malzemeler', helpKey: 'malzemeler' },
+  '/insaat/mahaller': { ad: 'Mahaller', helpKey: 'mahalListesi' },
+}
+
 const navGruplari: NavGrup[] = [
   {
     baslik: 'Genel',
@@ -136,7 +148,7 @@ const navGruplari: NavGrup[] = [
       {
     baslik: 'İNŞAAT MALİYET',
     maddeler: [
-      { ad: 'Genel Bakış', to: '/insaat/genel-bakis', ikon: BarChart3, hazir: true },
+      { ad: 'Genel Bakış', to: '/insaat/genel-bakis', ikon: BarChart3, hazir: true, helpKey: 'genelBakis' },
       {
         ad: 'Kütüphane',
         ikon: BookOpen,
@@ -144,16 +156,16 @@ const navGruplari: NavGrup[] = [
         children: [
           { ad: 'Yapı Sınıfları', to: '/insaat/yapi-sinifi', ikon: Ruler, hazir: true, helpKey: 'yapiSinifi' },
           { ad: 'Pozlar', to: '/insaat/pozlar', ikon: Layers, hazir: true, helpKey: 'pozlar' },
-          { ad: 'Malzemeler', to: '/insaat/malzemeler', ikon: Database, hazir: true },
+          { ad: 'Malzemeler', to: '/insaat/malzemeler', ikon: Database, hazir: true, helpKey: 'malzemeler' },
           { ad: 'Mahaller', to: '/insaat/mahaller', ikon: ClipboardList, hazir: true, helpKey: 'mahalListesi' },
         ]
       },
       { ad: 'Projeler', to: '/insaat/projeler', ikon: HardHat, hazir: true, helpKey: 'projeler' },
       { ad: 'Şantiye Günlükleri', to: '/insaat/santiye-gunlukleri', ikon: ClipboardList, hazir: true, helpKey: 'santiyeGunlukleri' },
-      { ad: 'Metraj & Keşif', to: '/insaat/metraj-kesif', ikon: Ruler, hazir: true },
-      { ad: 'Maliyet Hesabı', to: '/insaat/maliyet-hesabi', ikon: Calculator, hazir: true },
-      { ad: 'Raporlar', to: '/insaat/raporlar', ikon: FileText, hazir: true },
-      { ad: 'Ayarlar', to: '/insaat/ayarlar', ikon: Settings, hazir: true },
+      { ad: 'Metraj & Keşif', to: '/insaat/metraj-kesif', ikon: Ruler, hazir: true, helpKey: 'metrajKesif' },
+      { ad: 'Maliyet Hesabı', to: '/insaat/maliyet-hesabi', ikon: Calculator, hazir: true, helpKey: 'maliyetHesabi' },
+      { ad: 'Raporlar', to: '/insaat/raporlar', ikon: FileText, hazir: true, helpKey: 'insaatRaporlar' },
+      { ad: 'Ayarlar', to: '/insaat/ayarlar', ikon: Settings, hazir: true, helpKey: 'insaatAyarlar' },
     ],
   },
   {
@@ -182,7 +194,7 @@ const navGruplari: NavGrup[] = [
       { ad: 'Cari Hareketler', to: '/cari/hareketler', ikon: ClipboardList, hazir: true, helpKey: 'cariHareketler' },
       { ad: 'Finans Hesapları', to: '/finans/hesaplar', ikon: Landmark, hazir: true, helpKey: 'finansalHesaplar' },
       { ad: 'Finansal İşlemler', to: '/finans/islemler', ikon: Receipt, hazir: true, helpKey: 'finansalIslemler' },
-      { ad: 'Çek / Senetler', to: '/finans/cek-senetler', ikon: Receipt, hazir: true },
+      { ad: 'Çek / Senetler', to: '/finans/cek-senetler', ikon: Receipt, hazir: true, helpKey: 'cekSenetler' },
       { ad: 'Hesap Planı', to: '/muhasebe/hesap-plani', ikon: Landmark, hazir: true, helpKey: 'hesapPlani' },
       { ad: 'Fişler ve Mizan', to: '/muhasebe/fisler', ikon: Landmark, hazir: true, helpKey: 'fislerMizan' },
       { ad: 'Mizan Raporu', to: '/muhasebe/mizan', ikon: BarChart3, hazir: true, helpKey: 'mizanRaporu' },
@@ -208,8 +220,29 @@ const seciliMenuYardimi = computed(() => {
       return { madde, detay: menuHelp[madde.helpKey] }
     }
   }
+  const ozel = yolYardimEsleme[route.path]
+  if (ozel) {
+    return { madde: { ad: ozel.ad }, detay: menuHelp[ozel.helpKey] }
+  }
   return null
 })
+
+/** Yardım paneli görünürlüğü — ilk kullanımda açık, tercih kullanıcı bazlı saklanır. */
+const yardimAnahtari = computed(
+  () => `emlak_erp_yardim_paneli_${auth.kullanici?.username || 'anonim'}`,
+)
+const yardimAcik = ref(true)
+watch(yardimAnahtari, (anahtar) => {
+  yardimAcik.value = localStorage.getItem(anahtar) !== '0'
+}, { immediate: true })
+function yardimDegistir(acik: boolean): void {
+  yardimAcik.value = acik
+  try {
+    localStorage.setItem(yardimAnahtari.value, acik ? '1' : '0')
+  } catch {
+    /* depolama yoksa tercih hatırlanmaz; panel yine çalışır */
+  }
+}
 
 const gorunenNavGruplari = computed(() =>
   navGruplari.map((grup) => ({
@@ -481,8 +514,21 @@ function bildirimiOku(id: string, to: string): void {
           @kaydedildi="hatirlatmalariYukle"
         />
         <RouterView />
+        <div
+          v-if="seciliMenuYardimi && !yardimAcik"
+          class="mx-auto mt-6 flex max-w-6xl justify-end"
+        >
+          <button
+            type="button"
+            class="ikincil-dugme !px-3 !py-1.5 !text-xs"
+            title="Yardım panelini aç"
+            @click="yardimDegistir(true)"
+          >
+            Yardım
+          </button>
+        </div>
         <section
-          v-if="seciliMenuYardimi"
+          v-if="seciliMenuYardimi && yardimAcik"
           class="menu-yardim-panel mx-auto mt-6 max-w-6xl"
           role="region"
           :aria-label="`${seciliMenuYardimi.madde.ad} yardım bilgisi`"
@@ -493,6 +539,15 @@ function bildirimiOku(id: string, to: string): void {
               <h2 class="mt-1 text-lg font-bold text-surface-900">{{ seciliMenuYardimi.madde.ad }}</h2>
               <p class="mt-2 max-w-3xl text-sm leading-6 text-surface-600">{{ seciliMenuYardimi.detay.amac }}</p>
             </div>
+            <button
+              type="button"
+              class="ikincil-dugme !px-3 !py-1.5 !text-xs"
+              title="Yardım panelini kapat"
+              aria-label="Yardım panelini kapat"
+              @click="yardimDegistir(false)"
+            >
+              Kapat
+            </button>
           </div>
           <div class="mt-5 grid gap-5 border-t border-surface-200 pt-4 md:grid-cols-[1fr_1fr]">
             <div>

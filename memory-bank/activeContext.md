@@ -30,6 +30,19 @@ doğrulanmış gerçek durum (kod ağacından, 2026-09-23):
 
 ## Oturum kaydı
 
+### Oturum 27 — 2026-10-01: FAZ 9D release candidate final (doğrulama, değişiklik YOK)
+**Yapılanlar:** commit 196238f + temiz tree doğrulandı; baslat.bat.backup izli
+bulundu (zararsız, LOW); secret taraması dev-kapsam temiz; testler 9C ile aynı
+(check OK · 400 · vue-tsc 0 · 13/13 · build OK).
+**KARAR: FINAL RELEASE CANDIDATE: READY.**
+**Sonraki:** talimatla devam (push yok).
+
+### Oturum 26 — FAZ 9C git first commit (local, push yok)
+**Yapılanlar:** `git init -b main`; taslak-backup kuralı eklendi (.gitignore 1 satır);
+seçici staging (agent/.mcp.json dışarıda, 508 dosya); `196238f chore: initial
+release snapshot`; remote yok. Doğrulama: check OK · 400 · vue-tsc 0 · 13/13 · build OK.
+**Sonraki:** talimatla devam (push yok).
+
 ### Oturum 25 — 2026-10-01: FAZ 8H 3 LOW düzeltmesi
 **Yapılanlar:** FaturaDetay tr-TR tarih (`tarih()`); MalKabuller "Muhasebesiz" +
 neden; Stok iade hata-detay çıkarıcı (AxiosError yolu düzeltmesiyle).
